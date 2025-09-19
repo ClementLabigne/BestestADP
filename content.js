@@ -148,7 +148,7 @@
 
         // Insérer l'indicateur après l'élément de fin de première période
         try {
-            endOfFirstPeriodEntry.element.parentNode.insertBefore(lunchIndicator, endOfFirstPeriodEntry.element.nextSibling);
+            endOfFirstPeriodEntry.element.parentNode.insertBefore(lunchIndicator, endOfFirstPeriodEntry.element);
         } catch (error) {
             // En cas d'erreur, ne pas faire planter le script
         }
