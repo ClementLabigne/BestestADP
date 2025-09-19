@@ -1,0 +1,182 @@
+/* Styles pour le calculateur de temps de travail ADP */
+
+.time-summary {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border: 2px solid #007cba;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    position: relative;
+}
+
+.time-period {
+    margin: 5px 0;
+    padding: 8px;
+    background: white;
+    border-radius: 4px;
+    border-left: 3px solid #007cba;
+}
+
+.time-period.current-period {
+    background: #e8f5e8;
+    border-left-color: #28a745;
+}
+
+.time-duration {
+    color: #007cba;
+    font-weight: bold;
+}
+
+.time-duration-current {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.real-time-indicator {
+    margin-left: 8px;
+    font-size: 12px;
+    color: #666;
+}
+
+.lunch-info {
+    margin: 8px 0;
+    padding: 8px;
+    border-radius: 4px;
+    border-left: 3px solid;
+}
+
+.lunch-info.detected {
+    background: #d4edda;
+    border-left-color: #28a745;
+}
+
+.lunch-info.not-detected {
+    background: #fff3cd;
+    border-left-color: #ffc107;
+}
+
+.total-time {
+    margin-top: 15px;
+    padding: 12px;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.total-time.reached {
+    background: #28a745;
+}
+
+.total-time.in-progress {
+    background: #007cba;
+}
+
+.overtime {
+    margin-top: 8px;
+    padding: 12px;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.overtime.positive {
+    background: #dc3545;
+}
+
+.overtime.negative {
+    background: #fd7e14;
+}
+
+.target-info {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.target-info.clocked-in {
+    background: #ffc107;
+    color: #212529;
+    border: 2px solid #fd7e14;
+}
+
+.target-info.exceeded {
+    background: #28a745;
+    color: white;
+    border: 2px solid #20c997;
+}
+
+.target-info.completed {
+    background: #28a745;
+    color: white;
+    border: 2px solid #20c997;
+}
+
+.target-info.clocked-out {
+    background: #17a2b8;
+    color: white;
+    border: 2px solid #138496;
+}
+
+.remaining-time {
+    margin-top: 8px;
+    padding: 8px;
+    background: #e9ecef;
+    color: #495057;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.current-status {
+    margin-top: 8px;
+    padding: 8px;
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    border-radius: 4px;
+    color: #0c5460;
+}
+
+.settings-info {
+    margin-top: 10px;
+    padding: 6px;
+    background: #e2e3e5;
+    color: #495057;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.lunch-break-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    margin: 3px 0;
+    background: linear-gradient(45deg, #fff3cd, #ffeaa7);
+    border: 2px dashed #ffc107;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #856404;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-in;
+    z-index: 1000;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}

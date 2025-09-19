@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Calculateur Temps de Travail ADP",
+  "version": "2.4",
+  "description": "Calcule les temps de travail avec pause déjeuner, heures supplémentaires et insertion visuelle de la pause repas",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://mon.adp.com/redbox/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Calculateur Temps de Travail ADP"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
