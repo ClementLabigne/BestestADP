@@ -62,7 +62,7 @@
   function findLunchBreak(validEntries) {
     // Besoin d'au moins 3 entrées pour avoir une pause (entrée-sortie-entrée)
     if (validEntries.length < 3) {
-      return -1;
+      return { lunchBreakIndex: -1, lunchBreakDuration: 0 };
     }
 
     const lunchTimeStart = 11 * 60 + 30; // 11:30
@@ -188,7 +188,7 @@
       let remainingMinutes = TARGET_WORK_MINUTES - totalWorkedMinutes;
 
       // Si aucune pause repas détectée, ajouter 45 minutes
-      if (!hasDetectedLunchBreak && timeEntries.length >= 2) {
+      if (!hasDetectedLunchBreak) {
         remainingMinutes += MIN_LUNCH_BREAK_MINUTES;
       }
 
@@ -288,7 +288,10 @@
     // Trouver et marquer la pause déjeuner
     const { lunchBreakIndex, lunchBreakDuration } =
       findLunchBreak(validEntries);
-    const hasDetectedLunchBreak = lunchBreakIndex !== -1;
+    const lunchBreakIndexIsNumber =
+      typeof lunchBreakIndex === "number" && isFinite(lunchBreakIndex);
+    const hasDetectedLunchBreak =
+      lunchBreakIndexIsNumber && lunchBreakIndex !== -1;
     insertLunchBreakIndicator(
       validEntries,
       lunchBreakIndex,
