@@ -157,10 +157,19 @@
       document.head.appendChild(style);
     }
 
+    const lunchDurationIsAdjusted =
+      lunchBreakDuration < MIN_LUNCH_BREAK_MINUTES;
     lunchIndicator.innerHTML = `
             <span style="margin-right: 8px;">🍽️</span>
             <span>Pause repas - ${lunchBreakDuration} minutes</span>
             <span style="margin-left: 8px;">🍽️</span>
+            <span style="margin-left: 8px;">
+             ${
+               lunchDurationIsAdjusted
+                 ? ` (ajustée à ${MIN_LUNCH_BREAK_MINUTES} minutes)`
+                 : ``
+             }
+            </span>
         `;
 
     // Insérer l'indicateur après l'élément de fin de première période
@@ -177,19 +186,24 @@
   function calculateTargetClockOut(
     timeEntries,
     totalWorkedMinutes,
-    hasDetectedLunchBreak
+    hasDetectedLunchBreak,
+    lunchBreakDuration
   ) {
     if (timeEntries.length === 0) {
       return null;
+    }
+
+    // Si aucune pause repas détectée, ajouter 45 minutes
+    if (!hasDetectedLunchBreak) {
+      remainingMinutes += MIN_LUNCH_BREAK_MINUTES;
     }
 
     // Vérifier si nous avons un nombre impair d'entrées (actuellement pointé)
     if (timeEntries.length % 2 !== 0) {
       let remainingMinutes = TARGET_WORK_MINUTES - totalWorkedMinutes;
 
-      // Si aucune pause repas détectée, ajouter 45 minutes
-      if (!hasDetectedLunchBreak) {
-        remainingMinutes += MIN_LUNCH_BREAK_MINUTES;
+      if (lunchBreakDuration < MIN_LUNCH_BREAK_MINUTES) {
+        remainingMinutes += MIN_LUNCH_BREAK_MINUTES - lunchBreakDuration;
       }
 
       if (remainingMinutes <= 0) {
@@ -219,11 +233,6 @@
       };
     } else {
       let remainingMinutes = TARGET_WORK_MINUTES - totalWorkedMinutes;
-
-      // Si aucune pause repas détectée, ajouter 45 minutes
-      if (!hasDetectedLunchBreak && timeEntries.length >= 2) {
-        remainingMinutes += MIN_LUNCH_BREAK_MINUTES;
-      }
 
       if (remainingMinutes <= 0) {
         return {
@@ -333,21 +342,12 @@
     // Calculer les heures supplémentaires
     const overtimeMinutes = totalWorkedMinutes - TARGET_WORK_MINUTES;
 
-    // Appliquer l'ajustement pause déjeuner si nécessaire
-    let lunchAdjustment = 0;
-    if (
-      (timeDifferences.length > 1 ||
-        (timeDifferences.length === 1 && currentPeriod)) &&
-      !hasDetectedLunchBreak
-    ) {
-      lunchAdjustment = MIN_LUNCH_BREAK_MINUTES;
-    }
-
     // Calculer l'heure de pointage cible
     const targetInfo = calculateTargetClockOut(
       validEntries,
       totalWorkedMinutes,
-      hasDetectedLunchBreak
+      hasDetectedLunchBreak,
+      lunchBreakDuration
     );
 
     // Créer et insérer le résumé
@@ -356,10 +356,7 @@
       currentPeriod,
       totalWorkedMinutes,
       overtimeMinutes,
-      validEntries,
       targetInfo,
-      lunchAdjustment,
-      hasDetectedLunchBreak,
       viewLogContainer
     );
 
@@ -371,10 +368,7 @@
     currentPeriod,
     totalWorkedMinutes,
     overtimeMinutes,
-    validEntries,
     targetInfo,
-    lunchAdjustment,
-    hasDetectedLunchBreak,
     container
   ) {
     const summaryDiv = document.createElement("div");
