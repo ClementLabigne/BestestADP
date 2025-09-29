@@ -193,19 +193,18 @@
       return null;
     }
 
+    let remainingMinutes = TARGET_WORK_MINUTES - totalWorkedMinutes;
+
     // Si aucune pause repas détectée, ajouter 45 minutes
     if (!hasDetectedLunchBreak) {
       remainingMinutes += MIN_LUNCH_BREAK_MINUTES;
     }
+    if (hasDetectedLunchBreak && lunchBreakDuration < MIN_LUNCH_BREAK_MINUTES) {
+      remainingMinutes += MIN_LUNCH_BREAK_MINUTES - lunchBreakDuration;
+    }
 
     // Vérifier si nous avons un nombre impair d'entrées (actuellement pointé)
     if (timeEntries.length % 2 !== 0) {
-      let remainingMinutes = TARGET_WORK_MINUTES - totalWorkedMinutes;
-
-      if (lunchBreakDuration < MIN_LUNCH_BREAK_MINUTES) {
-        remainingMinutes += MIN_LUNCH_BREAK_MINUTES - lunchBreakDuration;
-      }
-
       if (remainingMinutes <= 0) {
         return {
           status: "exceeded",
@@ -232,8 +231,6 @@
         )} pour atteindre ${formatDuration(TARGET_WORK_MINUTES)}`,
       };
     } else {
-      let remainingMinutes = TARGET_WORK_MINUTES - totalWorkedMinutes;
-
       if (remainingMinutes <= 0) {
         return {
           status: "completed",
