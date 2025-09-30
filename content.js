@@ -161,12 +161,12 @@
       lunchBreakDuration < MIN_LUNCH_BREAK_MINUTES;
     lunchIndicator.innerHTML = `
             <span style="margin-right: 8px;">🍽️</span>
-            <span>Pause repas - ${lunchBreakDuration} minutes</span>
+            <span>Pause repas - ${formatDuration(lunchBreakDuration)}</span>
             <span style="margin-left: 8px;">🍽️</span>
             <span style="margin-left: 8px;">
              ${
                lunchDurationIsAdjusted
-                 ? ` (ajustée à ${MIN_LUNCH_BREAK_MINUTES} minutes)`
+                 ? ` (ajustée à ${formatDuration(MIN_LUNCH_BREAK_MINUTES)})`
                  : ``
              }
             </span>
@@ -417,9 +417,9 @@
             }; color: white; border-radius: 4px; text-align: center; font-size: 16px;">
                 <strong>🕐 Temps de travail actuel: ${formatDuration(
                   totalWorkedMinutes
-                )} (${
-      overtimeMinutes > 0 ? "+" : ""
-    }${overtimeMinutes} minutes)</strong>
+                )} (${overtimeMinutes > 0 ? "+" : ""}${formatDuration(
+      overtimeMinutes
+    )})</strong>
             </div>
         `;
 
