@@ -199,9 +199,6 @@
     if (!hasDetectedLunchBreak) {
       remainingMinutes += MIN_LUNCH_BREAK_MINUTES;
     }
-    if (hasDetectedLunchBreak && lunchBreakDuration < MIN_LUNCH_BREAK_MINUTES) {
-      remainingMinutes += MIN_LUNCH_BREAK_MINUTES - lunchBreakDuration;
-    }
 
     // Vérifier si nous avons un nombre impair d'entrées (actuellement pointé)
     if (timeEntries.length % 2 !== 0) {
@@ -307,6 +304,9 @@
     // Calculer les différences de temps entre les paires
     const timeDifferences = [];
     let totalWorkedMinutes = 0;
+    if (lunchBreakDuration < MIN_LUNCH_BREAK_MINUTES) {
+      totalWorkedMinutes -= MIN_LUNCH_BREAK_MINUTES - lunchBreakDuration;
+    }
 
     for (let i = 0; i < validEntries.length - 1; i += 2) {
       if (i + 1 < validEntries.length) {
