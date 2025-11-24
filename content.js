@@ -183,22 +183,12 @@
     }
   }
 
-  function calculateTargetClockOut(
-    timeEntries,
-    totalWorkedMinutes,
-    hasDetectedLunchBreak,
-    lunchBreakDuration
-  ) {
+  function calculateTargetClockOut(timeEntries, totalWorkedMinutes) {
     if (timeEntries.length === 0) {
       return null;
     }
 
     let remainingMinutes = TARGET_WORK_MINUTES - totalWorkedMinutes;
-
-    // Si aucune pause repas détectée, ajouter 45 minutes
-    if (!hasDetectedLunchBreak) {
-      remainingMinutes += MIN_LUNCH_BREAK_MINUTES;
-    }
 
     // Vérifier si nous avons un nombre impair d'entrées (actuellement pointé)
     if (timeEntries.length % 2 !== 0) {
@@ -342,9 +332,7 @@
     // Calculer l'heure de pointage cible
     const targetInfo = calculateTargetClockOut(
       validEntries,
-      totalWorkedMinutes,
-      hasDetectedLunchBreak,
-      lunchBreakDuration
+      totalWorkedMinutes
     );
 
     // Créer et insérer le résumé
