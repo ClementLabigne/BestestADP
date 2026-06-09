@@ -9,7 +9,7 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://mon.adp.com/redbox/*"],
+      "matches": ["https://mon.adp.com/static/redbox/*"],
       "js": ["content.js"],
       "run_at": "document_end"
     }

@@ -35,7 +35,7 @@ Extension Chrome professionnelle pour calculer automatiquement les temps de trav
 ## 📖 Utilisation
 
 ### ⚡ Utilisation automatique
-1. **Naviguez** vers votre page de pointage ADP (`https://mon.adp.com/redbox/*`)
+1. **Naviguez** vers votre page de pointage ADP (`https://mon.adp.com/static/redbox/*`)
 2. **Attendez** le chargement automatique (2-5 secondes)
 3. **Consultez** le résumé qui s'affiche sous vos entrées de pointage
 
@@ -108,7 +108,7 @@ Extension Chrome professionnelle pour calculer automatiquement les temps de trav
 ## 🐛 Résolution de problèmes
 
 ### ❌ L'extension ne fonctionne pas
-1. **Vérifiez l'URL** : Assurez-vous d'être sur `https://mon.adp.com/redbox/*`
+1. **Vérifiez l'URL** : Assurez-vous d'être sur `https://mon.adp.com/static/redbox/*`
 2. **Rechargez la page** : Appuyez sur F5 pour recharger
 3. **Recalculez manuellement** : Utilisez le bouton dans le popup
 4. **Console développeur** : Ouvrez F12 et vérifiez les erreurs

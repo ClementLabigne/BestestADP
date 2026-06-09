@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         status.className = 'status working';
         
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            if (tabs[0].url.includes('mon.adp.com/redbox')) {
+            if (tabs[0].url.includes('mon.adp.com/static/redbox')) {
                 chrome.tabs.sendMessage(tabs[0].id, {action: 'recalculate'}, function(response) {
                     if (chrome.runtime.lastError) {
                         status.textContent = '❌ Page ADP non détectée - rechargez la page';
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Notifier le content script du changement
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                if (tabs[0].url.includes('mon.adp.com/redbox')) {
+                if (tabs[0].url.includes('mon.adp.com/static/redbox')) {
                     chrome.tabs.sendMessage(tabs[0].id, {
                         action: 'updateTarget',
                         hours: hours,
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function resetStatus() {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            if (tabs[0].url.includes('mon.adp.com/redbox')) {
+            if (tabs[0].url.includes('mon.adp.com/static/redbox')) {
                 status.textContent = '✅ Extension active sur cette page';
                 status.className = 'status active';
             } else {
